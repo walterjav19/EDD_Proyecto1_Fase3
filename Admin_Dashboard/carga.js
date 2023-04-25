@@ -2,7 +2,7 @@ import {Estudiante} from '../Roles/estudiante.js'
 import { ArbolAVL } from '../Estructuras/ArbolAVL.js';
 import {HashTable} from '../Estructuras/TablaHash.js'
 
-    let users = new HashTable(7);
+   let users = new HashTable(7);
    document.getElementById("jsonFile").addEventListener("change", function () {
         
         let file_to_read = document.getElementById("jsonFile").files[0];

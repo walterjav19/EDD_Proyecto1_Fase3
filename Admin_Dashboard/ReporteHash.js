@@ -1,5 +1,5 @@
 import {HashTable} from '../Estructuras/TablaHash.js'
-import {encodeText} from '../Estructuras/encriptar.js'
+//import {encodeText} from '../Estructuras/encriptar.js'
 
 let users = new HashTable(7);
 
@@ -17,7 +17,7 @@ for(let usuario of users.data){
         let celdacontra = nuevaFila.insertCell(2);
         celdacarnet.innerHTML =usuario.carnet ;
         celdanombre.innerHTML=usuario.nombre;
-        celdacontra.innerHTML = encodeText(usuario.password);
+        celdacontra.innerHTML = usuario.password;
         i++;
     }
     
