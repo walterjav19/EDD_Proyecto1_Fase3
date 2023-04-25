@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+   <script src="../Estructuras/ArbolN.js" type="module"></script>
+    <script src="./principal.js" type="module"></script>
+    <script src="./CrearCarpeta.js" type="module"></script>
+    <title>Main Page</title>
+    <script src="https://kit.fontawesome.com/f11354f123.js" crossorigin="anonymous"></script>
+</head>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./main_page.html" id="bann"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link disabled" href="./archivos_arbol.html">Carpetas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Permisos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="./bitacora.html">Bitacora</a>
+            </li>
+          </ul>
+          <a href="#" id="logout">Cerrar sesión</a>
+          <script src="../Admin_Dashboard/logout.js"></script>
+        </div>
+      </nav>
+   
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">/</span>
+  </div>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  <button type="button" id="buscar" class="btn btn-outline-info">🔎</button>
+</div>
+
+
+<!--es donde las carpetas se muestran visualmente-->
+<div class="cuadro" id="folder-container">
+
+</div>
+
+
+
+
+
+
+
+<div class="carpent">
+  <button type="button" class="btn btn-outline-success" id="btncrear">Crear Carpeta</button>
+  <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Eliminar Carpeta</button>
+  <label for="subirArchivo" style="display: inline-block; position: relative; width: 100px; height: 100px; border: 1px solid #ddd; border-radius: 50%; text-align: center; line-height: 100px;">
+    <i class="fa-solid fa-cloud-arrow-up" style="color: #1860dc; font-size: 50px;"></i>
+    <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; transition: all 0.3s;">Subir archivo</span>
+  </label>
+  <input id="subirArchivo" type="file" accept="image/jpg,image/png,image/gif, image/jpeg,.txt,.pdf" style="display: none;">
+</div>
+
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="miModalLabel">Ingrese la ruta de la nueva carpeta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="miCampo" placeholder="/ruta">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrar2">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="miBotonModal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal 2 para elminar-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿ Desea Eliminar la carpeta de la ruta actual ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-success" id="btnSi">Si</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+

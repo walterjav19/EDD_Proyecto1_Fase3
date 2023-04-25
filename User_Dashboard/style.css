@@ -1,0 +1,109 @@
+#logout {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  #logout:hover {
+    background-color: #d00;
+  }
+  .cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carpent{
+  position: absolute; /* Asegura que el elemento esté posicionado de forma absoluta */
+  top: 75%; /* Coloca el borde superior del elemento en el centro vertical */
+  left: 50%; /* Coloca el borde izquierdo del elemento en el centro horizontal */
+  transform: translate(-50%, 50%);
+}
+
+
+.fa-folder {
+  font-size: 48px; /* Cambia el tamaño a 48 píxeles */
+}
+
+.fa-file-pdf {
+  font-size: 48px; /* Cambia el tamaño a 48 píxeles */
+}
+
+.fa-file-lines {
+  font-size: 48px; /* Cambia el tamaño a 48 píxeles */
+}
+
+.imagenesicons{
+  width: 60px;
+  height: 60px;
+}
+
+.folder-icon {
+  display: inline-block;
+  text-align: center;
+}
+
+.folder-icon .fa-folder {
+  font-size: 48px;
+  display: block;
+}
+
+
+.fa-file-pdf {
+  display: inline-block;
+  text-align: center;
+}
+
+.folder-icon .fa-file-pdf {
+  font-size: 48px;
+  display: block;
+}
+
+.fa-file-lines {
+  display: inline-block;
+  text-align: center;
+}
+
+.folder-icon .fa-file-lines {
+  font-size: 48px;
+  display: block;
+}
+
+
+.imagenesicons {
+  display: inline-block;
+  text-align: center;
+}
+
+.folder-icon .imagenesicons {
+  font-size: 48px;
+  display: block;
+}
+
+.folder-name {
+  font-size: 16px;
+}
+
+.pdf-name {
+  font-size: 10px;
+}
+
+.text-name {
+  font-size: 16px;
+}
+
+i{
+  margin: 10px;
+  padding: 10px;
+}
+img{
+  margin: 10px;
+  padding: 10px;
+}
+
+span{
+  margin: 3px;
+  padding: 3px;
+}

@@ -1,0 +1,30 @@
+.cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+    background-color: skyblue;
+}
+
+.containb{
+    
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#logout {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  #logout:hover {
+    background-color: #d00;
+  }

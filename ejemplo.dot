@@ -1,0 +1,10 @@
+digraph MatrizCapa{ 
+    
+    rankdir=LR;
+
+    node [shape=circle];
+      Nodoidff9b0de5e244b [label ="/"]  
+      Nodoidda249db1e4b18 [label ="vilma"]  
+      Nodoidff9b0de5e244b -> Nodoidda249db1e4b18  [label ="1"]
+      Nodoid466b04c7a90cf [label ="dexter"]  
+      Nodoidff9b0de5e244b -> Nodoid466b04c7a90cf  }
