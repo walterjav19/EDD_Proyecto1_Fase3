@@ -3,6 +3,31 @@ import {CircularLinkedList} from './Estructuras/lista_circular.js'
 import { Arbol } from './Estructuras/ArbolN.js';
 import { AvlArchivos } from './Estructuras/arbolArchivos.js';
 import {HashTable} from './Estructuras/TablaHash.js'
+//import { MatrizEsparcida } from './Estructuras/matriz.js';
+
+
+/*let matrix=new MatrizEsparcida()
+matrix.agregarFila("2021112")
+matrix.agregarFila("20211124")
+matrix.agregarFila("20211125")
+matrix.agregarFila("203213")
+matrix.agregarColumna("hola.pdf")
+matrix.agregarColumna("mane.txt")
+matrix.agregarColumna("ror.jpg")
+matrix.agregarColumna("mama.jpg")
+
+
+matrix.insertar(0,0,"rw")
+matrix.insertar(1,0,"fr")
+matrix.insertar(2,0,"w")
+matrix.insertar(1,1,"j")
+matrix.insertar(2,1,"i")
+matrix.insertar(3,1,"m")
+
+console.log(matrix)
+console.log(matrix.graficar())
+matrix.recorrer()*/
+
 
 window.validateForm =function() {
 
