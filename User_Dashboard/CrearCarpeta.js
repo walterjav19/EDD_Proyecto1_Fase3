@@ -4,6 +4,8 @@ import { AvlArchivos } from "../Estructuras/arbolArchivos.js";
 import { Archivo } from "../Estructuras/arbolArchivos.js";
 import {HashTable} from '../Estructuras/TablaHash.js'
 import { MatrizEsparcida, Nodo } from '../Estructuras/matriz.js';
+import { Permiso } from "../Roles/permisos.js";
+
 
 document.getElementById("btncrear").onclick=function (){
 
@@ -118,7 +120,32 @@ document.getElementById("btnpermiso").onclick=function (){
                     }
 
                     
-                    
+                    //tabla de permisos
+                    if(localStorage.getItem("T_Permisos")==null){
+                        let tp=[]
+                        let permiso= new Permiso(username,carnet.value,ruta,archivo.value,input.value)
+                        let lc=new CircularLinkedList()
+                        tp.push(permiso)
+                        lc.append(permiso)
+                        localStorage.setItem("T_Permisos",JSON.stringify(tp))
+                        localStorage.setItem("T_Permisos_prop",JSON.stringify(lc)) 
+                    }else{
+                        let lc=new CircularLinkedList()
+                        const tp_n=JSON.parse(localStorage.getItem("T_Permisos"))
+                        
+
+                        let pe= new Permiso(username,carnet.value,ruta,archivo.value,input.value)
+                        tp_n.push(pe)
+
+                        for(let permiso of tp_n){
+                            lc.append(permiso)
+                        }
+
+
+
+                        localStorage.setItem("T_Permisos",JSON.stringify(tp_n))
+                        localStorage.setItem("T_Permisos_prop",JSON.stringify(lc)) 
+                    }
                    
 
                     $('#exito').modal('show');

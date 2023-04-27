@@ -18,9 +18,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
   crossorigin="anonymous"></script>
-  <script src="carga.js" type="module"></script> 
 </head>
-
+<script src="permisos.js" type="module"></script>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Admin Dashboard</a>
@@ -55,14 +54,20 @@
       <script src="logout.js"></script>
     </div>
   </nav>
-
-
-  <div class="containb">
-          <input type="file" id="jsonFile">
-
-      </div>
   </div>
-  
+  <table id="tablapermisos" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Propietario</th>
+        <th>Destino</th>
+        <th>Ubicacion</th>
+        <th>Archivo</th>
+        <th>Permiso</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 </body>
 
 </html>
