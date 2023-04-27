@@ -21,6 +21,7 @@
     <script src="./CrearCarpeta.js" type="module"></script>
     <title>Main Page</title>
     <script src="https://kit.fontawesome.com/f11354f123.js" crossorigin="anonymous"></script>
+    
 </head>
 </head>
 <body>
@@ -79,7 +80,11 @@
     <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; transition: all 0.3s;">Subir archivo</span>
   </label>
   <input id="subirArchivo" type="file" accept="image/jpg,image/png,image/gif, image/jpeg,.txt,.pdf" style="display: none;">
+  <a href="" class="btn btn-primarbtn btn-primary" data-toggle="modal" id="per" data-target="#modalRegisterForm">Dar
+    Permisos</a>
 </div>
+
+
 
 <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -127,9 +132,162 @@
 </div>
 
 
+<!-- Modal de permisos -->
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Permisos</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fa-solid fa-file-export" style="color: #1760de;"></i>
+          <input type="text" id="name_archivo" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-name">Nombre del Archivo</label>
+        </div>
+        <div class="md-form mb-5">
+          <i class="fa-solid fa-id-card" style="color: #151514;"></i>
+          <input type="email" id="name_carnet" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Carnet del usuario</label>
+        </div>
+
+        <!-- Example single danger button -->
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Action
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" id="read" href="#">Read</a>
+          <a class="dropdown-item" id="write" href="#">Write</a>
+          <a class="dropdown-item" id="readwrite" href="#">Read and Write</a>
+        </div>
+      </div>
+      <div class="md-form mb-5">
+        <input class="form-control" id="disabledInput" type="text" placeholder="" disabled>
+        <label data-error="wrong" class="disabled" data-success="right" for="orangeForm-email">Permiso</label>
+        
+      
+      </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-success" id="btnpermiso">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de no se encontro usuario -->
+<div class="modal fade" id="nouser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Usuario No encontrado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lamentablemente no podemos dar permisos a un usuario inexistente
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de no se encontro archivo -->
+<div class="modal fade" id="noarchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Archivo No encontrado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Lamentablemente no podemos dar permisos a un archivo inexistente
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de no se puede otorgar permiso a uno mismo -->
+<div class="modal fade" id="permisoinco" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Permisos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Tu Usuario ya tiene todos los permisos permitidos
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
+<!-- Modal de no se eligio el permiso -->
+<div class="modal fade" id="vacio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Elija modo otorgado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Elija que privilegio quiere dar al usuario 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de exito -->
+<div class="modal fade" id="exito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Privilegio otorgado!!!!!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Se otorgaron los permisos correpondientes
+      </div>
+      <center>
+        <i class="fa-sharp fa-solid fa-check-to-slot" style="color: #14c240;"></i>
+      </center>
+      
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-success" data-dismiss="modal">Continuar</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

@@ -119,16 +119,27 @@ export class MatrizEsparcida{
         }
       }
 
-    recorrer(){
-        for(let i=0;i<this.columnas.length;i++){
-            for(let j=0;j<this.filas.length;j++){
-                console.log(this.obtener(j,i))
+    obtenerFila(carnet){
+        for(let i=0;i<this.filas.length;i++){
+            if(this.filas[i].valor==carnet){
+                return this.filas[i]
             }
         }
+    
+    }
+
+
+    obtenerColumna(nombre){
+        for(let i=0;i<this.columnas.length;i++){
+            if(this.columnas[i].valor==nombre){
+                return this.columnas [i]
+            }
+        }
+    
     }
 
     graficar(){
-        let header="digraph L{\n node[shape=box fillcolor=\"#FFEDBB\" style=filled]\n subgraph cluster_p{\nlabel=\"Matriz Dispersa\"\nbgcolor=\"#398D9C\"\nraiz[label=\"raiz\"]\nedge[dir=\"both\"]\n"
+        let header="digraph L{\n node[shape=box fillcolor=\"#FFEDBB\" style=filled]\n subgraph cluster_p{\nlabel=\"Permisos\"\nbgcolor=\"#398D9C\"\nraiz[label=\"raiz\"]\nedge[dir=\"both\"]\n"
         let conectacolumnas=""
         for(let columna of this.columnas){
             if(columna.abajo){

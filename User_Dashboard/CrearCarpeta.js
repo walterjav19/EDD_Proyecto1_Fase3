@@ -2,6 +2,8 @@ import { Arbol} from "../Estructuras/ArbolN.js";
 import { CircularLinkedList } from "../Estructuras/lista_circular.js";
 import { AvlArchivos } from "../Estructuras/arbolArchivos.js";
 import { Archivo } from "../Estructuras/arbolArchivos.js";
+import {HashTable} from '../Estructuras/TablaHash.js'
+
 
 document.getElementById("btncrear").onclick=function (){
 
@@ -11,7 +13,75 @@ document.getElementById("btncrear").onclick=function (){
 document.getElementById("cerrar2").onclick=function (){
     $("#miModal").modal("hide"); // Oculta la modal
 }
+document.getElementById("btnpermiso").onclick=function (){
+    let users = new HashTable(7);
+    const miobjeto=JSON.parse(localStorage.getItem("TablaHash"))
+    const username=JSON.parse(localStorage.getItem("estudiante")).carnet
+    users.data=miobjeto.data
+    let texto=document.getElementById("basic-url").value
+    let ruta="/"+texto
+    let archivos
 
+
+    if(ruta=="/"){
+        archivos= JSON.parse(localStorage.getItem("archivos/"+username.toString()))   
+    }else{
+        archivos=JSON.parse(localStorage.getItem("archivos"+ruta+username))
+    }
+
+    
+    const input=document.getElementById("disabledInput")
+    const archivo=document.getElementById("name_archivo")
+    const carnet=document.getElementById("name_carnet")
+   
+    if(existearchivo(archivos,archivo.value.toString())==false){
+        $('#noarchivo').modal('show');
+    }else{
+        if(users.get(parseInt(carnet.value))==undefined){
+            $('#nouser').modal('show');
+        }else{
+            if(parseInt(username)==parseInt(carnet.value)){
+                $('#permisoinco').modal('show');
+            }else{
+                if(input.value==""){
+                    $('#vacio').modal('show');
+                }else{
+                    console.log("archivo: "+archivo.value)
+                    console.log("modo: "+input.value)
+                    console.log(users.get(parseInt(carnet.value)))
+                    $('#exito').modal('show');
+                }
+            }
+        
+        }
+    }
+
+    
+
+    
+
+    $("#modalRegisterForm").modal("hide"); // Oculta la modal
+}
+document.getElementById("per").onclick=function (){
+    const input=document.getElementById("disabledInput")
+    const archivo=document.getElementById("name_archivo")
+    const carnet=document.getElementById("name_carnet")
+    archivo.value=""
+    carnet.value=""
+    input.value=""
+}
+document.getElementById("read").onclick=function (){
+    const input=document.getElementById("disabledInput")
+    input.value="r"
+}
+document.getElementById("write").onclick=function (){
+    const input=document.getElementById("disabledInput")
+    input.value="w"
+}
+document.getElementById("readwrite").onclick=function (){
+    const input=document.getElementById("disabledInput")
+    input.value="r-w"
+}
 
 document.getElementById("miBotonModal").onclick=function (){
     let ruta=document.getElementById("miCampo").value
@@ -55,7 +125,7 @@ document.getElementById("miBotonModal").onclick=function (){
         let arbol_archivos=new AvlArchivos();
         
 
-        localStorage.setItem(ruta+"(copia)",JSON.stringify(arbol_archivos))
+        localStorage.setItem(ruta+"(copia)"+username,JSON.stringify(arbol_archivos))
         
         localStorage.setItem("arboln"+username,JSON.stringify(newArbol))
 
@@ -94,7 +164,7 @@ document.getElementById("miBotonModal").onclick=function (){
     let arbol_archivos=new AvlArchivos();
     
 
-    localStorage.setItem(ruta,JSON.stringify(arbol_archivos))
+    localStorage.setItem(ruta+username,JSON.stringify(arbol_archivos))
     
     localStorage.setItem("arboln"+username,JSON.stringify(newArbol))
     }
@@ -149,8 +219,8 @@ document.getElementById("btnSi").onclick=function (){
     $("#exampleModal").modal("hide"); // Oculta la modal
     document.getElementById("basic-url").value="";
     let lista=[]
-    localStorage.setItem(ruta,new AvlArchivos())
-    localStorage.setItem("archivos"+ruta,lista)
+    localStorage.setItem(ruta+username,new AvlArchivos())
+    localStorage.setItem("archivos"+ruta+username,lista)
 
 }
 
@@ -284,8 +354,8 @@ document.getElementById("buscar").onclick=function (){
             folderContainer.appendChild(folder);
         }
 
-        const misarchivos=JSON.parse(localStorage.getItem(ruta))
-        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos"+ruta))
+        const misarchivos=JSON.parse(localStorage.getItem(ruta+username))
+        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos"+ruta+username))
 
         recorrer(misarchivos.arbol)
 
@@ -478,14 +548,14 @@ window.existearchivo=function(misarchivos,nombre){
 
 
         }else{
-            const miarbol=JSON.parse(localStorage.getItem(ruta))
+            const miarbol=JSON.parse(localStorage.getItem(ruta+username))
             if(miarbol.arbol===undefined){//no hay archivos
                 let arch=new Archivo(filename,base64String,filetype);
                 arbol_archivos.insertar(arch);
                 let lista_archivos=[]
                 lista_archivos.push(arch)
-                localStorage.setItem("archivos"+ruta,JSON.stringify(lista_archivos))
-                localStorage.setItem(ruta,JSON.stringify(arbol_archivos))
+                localStorage.setItem("archivos"+ruta+username,JSON.stringify(lista_archivos))
+                localStorage.setItem(ruta+username,JSON.stringify(arbol_archivos))
 
                 let fecha=new Date();
                 let actual="Fecha: "+fecha.getDate()+"-"+(fecha.getMonth()+1)+"-"+fecha.getFullYear()
@@ -506,7 +576,7 @@ window.existearchivo=function(misarchivos,nombre){
 
 
             }else{
-                const misarchivos=JSON.parse(localStorage.getItem("archivos"+ruta))
+                const misarchivos=JSON.parse(localStorage.getItem("archivos"+ruta+username))
 
 
                 if(existearchivo(misarchivos,filename)){//repe
@@ -524,8 +594,8 @@ window.existearchivo=function(misarchivos,nombre){
                     arbol_archivos.insertar(arch);
 
                     misarchivos.push(arch)
-                    localStorage.setItem("archivos"+ruta,JSON.stringify(misarchivos))
-                    localStorage.setItem(ruta,JSON.stringify(arbol_archivos))
+                    localStorage.setItem("archivos"+ruta+username,JSON.stringify(misarchivos))
+                    localStorage.setItem(ruta+username,JSON.stringify(arbol_archivos))
 
                     
                     let fecha=new Date();
@@ -558,9 +628,9 @@ window.existearchivo=function(misarchivos,nombre){
                     
                     misarchivos.push(arch)
     
-                    localStorage.setItem("archivos"+ruta,JSON.stringify(misarchivos))
+                    localStorage.setItem("archivos"+ruta+username,JSON.stringify(misarchivos))
     
-                    localStorage.setItem(ruta,JSON.stringify(arbol_archivos))
+                    localStorage.setItem(ruta+username,JSON.stringify(arbol_archivos))
 
 
 
