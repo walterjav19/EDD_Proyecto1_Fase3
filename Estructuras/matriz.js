@@ -1,5 +1,5 @@
 
-class Nodo {
+export class Nodo {
     constructor(valor) {
       this.valor = valor;
       this.i=0
@@ -119,12 +119,34 @@ export class MatrizEsparcida{
         }
       }
 
+    nodosInternos(){
+        let nodos_internos=[]
+        for(let i=0;i<this.columnas.length;i++){
+            for(let j=0;j<this.filas.length;j++){
+                if(this.obtener(j,i)){
+                    nodos_internos.push(this.obtener(j,i))
+                }
+            }
+        }
+        return nodos_internos
+    }  
+
     obtenerFila(carnet){
         for(let i=0;i<this.filas.length;i++){
             if(this.filas[i].valor==carnet){
                 return this.filas[i]
             }
         }
+    
+    }
+
+    ExisteFila(carnet){
+        for(let i=0;i<this.filas.length;i++){
+            if(this.filas[i].valor==carnet){
+                return true
+            }
+        }
+        return false
     
     }
 
@@ -138,8 +160,30 @@ export class MatrizEsparcida{
     
     }
 
-    graficar(){
-        let header="digraph L{\n node[shape=box fillcolor=\"#FFEDBB\" style=filled]\n subgraph cluster_p{\nlabel=\"Permisos\"\nbgcolor=\"#398D9C\"\nraiz[label=\"raiz\"]\nedge[dir=\"both\"]\n"
+    ExisteColumna(nombre){
+        for(let i=0;i<this.columnas.length;i++){
+            if(this.columnas[i].valor==nombre){
+                return true
+            }
+        }
+        return false
+    
+    }
+    repodefault(nombre){
+        let rep=`
+        digraph L{
+         node[shape=box fillcolor="#FFEDBB" style=filled]
+         subgraph cluster_p{
+        label="Permisos"
+        bgcolor="#398D9C"
+        raiz[label="${nombre}"]
+        edge[dir="both"]
+         raiz->F1
+         raiz->C1{rank=same;raiz,C1}}}`
+         return rep
+    }
+    graficar(nombre){
+        let header="digraph L{\n node[shape=box fillcolor=\"#FFEDBB\" style=filled]\n subgraph cluster_p{\nlabel=\"Permisos\"\nbgcolor=\"#398D9C\"\nraiz[label=\""+nombre+"\"]\nedge[dir=\"both\"]\n"
         let conectacolumnas=""
         for(let columna of this.columnas){
             if(columna.abajo){

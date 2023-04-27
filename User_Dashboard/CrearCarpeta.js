@@ -3,7 +3,7 @@ import { CircularLinkedList } from "../Estructuras/lista_circular.js";
 import { AvlArchivos } from "../Estructuras/arbolArchivos.js";
 import { Archivo } from "../Estructuras/arbolArchivos.js";
 import {HashTable} from '../Estructuras/TablaHash.js'
-
+import { MatrizEsparcida, Nodo } from '../Estructuras/matriz.js';
 
 document.getElementById("btncrear").onclick=function (){
 
@@ -46,9 +46,81 @@ document.getElementById("btnpermiso").onclick=function (){
                 if(input.value==""){
                     $('#vacio').modal('show');
                 }else{
-                    console.log("archivo: "+archivo.value)
-                    console.log("modo: "+input.value)
-                    console.log(users.get(parseInt(carnet.value)))
+                    let matrix=new MatrizEsparcida()
+                    let i,j
+
+                    if(localStorage.getItem("Filas"+ruta+username)===null){
+                        let listaFilas=[]
+                        matrix.agregarFila(carnet.value)
+                        listaFilas=matrix.filas
+                        localStorage.setItem("Filas"+ruta+username,JSON.stringify(listaFilas))
+                    }else{
+                        let listaFilas=JSON.parse(localStorage.getItem("Filas"+ruta+username))
+                        for(let fila of listaFilas ){
+                            matrix.agregarFila(fila.valor)
+                        }
+
+
+                        if(matrix.ExisteFila(carnet.value)){
+                            console.log('ya hay una fila')
+                        }else{
+                            matrix.agregarFila(carnet.value)
+                            listaFilas=matrix.filas
+                            localStorage.setItem("Filas"+ruta+username,JSON.stringify(listaFilas))
+                        }
+
+                        
+                    }
+
+                    if(localStorage.getItem("Columnas"+ruta+username)===null){
+                        let listaColumnas=[]
+                        matrix.agregarColumna(archivo.value)
+                        listaColumnas=matrix.columnas
+                        localStorage.setItem("Columnas"+ruta+username,JSON.stringify(listaColumnas))
+                    }else{
+                        let listaColumnas=JSON.parse(localStorage.getItem("Columnas"+ruta+username))
+                        for(let columna of listaColumnas ){
+                            matrix.agregarColumna(columna.valor)
+                        }
+
+                        if(matrix.ExisteColumna(archivo.value)){
+                            console.log('ya hay una columna')
+                        }else{
+                            matrix.agregarColumna(archivo.value)
+                            listaColumnas=matrix.columnas
+                            localStorage.setItem("Columnas"+ruta+username,JSON.stringify(listaColumnas))
+                        }
+
+
+                    }
+
+                    i=matrix.obtenerFila(carnet.value).i
+                    j=matrix.obtenerColumna(archivo.value).j
+                    if(localStorage.getItem("Internos"+ruta+username)==null){
+                        let nodosinternos=[]
+                        let Node=new Nodo(input.value)
+                        Node.i=i
+                        Node.j=j
+                        matrix.insertar(i,j,input.value)
+                        nodosinternos.push(Node)
+                        localStorage.setItem("Internos"+ruta+username,JSON.stringify(nodosinternos))
+                    }else{
+                        let nodosinternos=JSON.parse(localStorage.getItem("Internos"+ruta+username))
+                        for(let node of nodosinternos){
+                            matrix.insertar(node.i,node.j,node.valor)
+                        }
+                        let Node=new Nodo(input.value)
+                        Node.i=i
+                        Node.j=j
+                        matrix.insertar(i,j,input.value)
+                        nodosinternos.push(Node)
+                        localStorage.setItem("Internos"+ruta+username,JSON.stringify(nodosinternos))
+                    }
+
+                    
+                    
+                   
+
                     $('#exito').modal('show');
                 }
             }

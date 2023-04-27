@@ -1,48 +1,10 @@
+
 digraph L{
  node[shape=box fillcolor="#FFEDBB" style=filled]
  subgraph cluster_p{
-label="Matriz Dispersa"
+label="Permisos"
 bgcolor="#398D9C"
-raiz[label="raiz"]
+raiz[label="/mate"]
 edge[dir="both"]
-C1[label="hola.pdf",group=1];
- C1->C2
-C2[label="mane.txt",group=1];
- C2->C3
-C3[label="ror.jpg",group=1];
- C3->C4
-C4[label="mama.jpg",group=1];
-F1[label="2021112",group="2",fillcolor=yellow];
- F1->F2
-F2[label="20211124",group="3",fillcolor=yellow];
- F2->F3
-F3[label="20211125",group="4",fillcolor=yellow];
- F3->F4
-F4[label="203213",group="5",fillcolor=yellow];
-  raiz->F1
- raiz->C1{rank=same;raiz,F1,F2,F3,F4}
-nodo0_0[label="rw",fillcolor=green,group=2]
-F1->nodo0_0
-C1->nodo0_0
-{rank=same;C1,nodo0_0}
-nodo1_0[label="fr",fillcolor=green,group=3]
-F2->nodo1_0
-nodo1_0->nodo0_0
-{rank=same;nodo1_0,nodo0_0}
-nodo2_0[label="w",fillcolor=green,group=4]
-F3->nodo2_0
-nodo2_0->nodo1_0
-{rank=same;nodo2_0,nodo1_0}
-nodo1_1[label="j",fillcolor=green,group=3]
-C2->nodo1_1
-{rank=same;C2,nodo1_1}
-nodo1_1->nodo1_0
-nodo2_1[label="i",fillcolor=green,group=4]
-nodo2_1->nodo1_1
-{rank=same;nodo2_1,nodo1_1}
-nodo2_1->nodo2_0
-nodo3_1[label="m",fillcolor=green,group=5]
-F4->nodo3_1
-nodo3_1->nodo2_1
-{rank=same;nodo3_1,nodo2_1}
-}}
+ raiz->F1
+ raiz->C1{rank=same;raiz,C1}}}
