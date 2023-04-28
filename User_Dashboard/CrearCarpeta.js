@@ -149,9 +149,9 @@ document.getElementById("btnpermiso").onclick=function (){
 
 
                     //compartidos
-
+                    
                     if(localStorage.getItem("Compartidos"+carnet.value)==null){
-                        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos/"+username))
+                        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos"+ruta+username))
                         let lc_compartidos=new CircularLinkedList()
                         let compartidos=[]
                         let archivo_obtenido=obtenerArchivo(misarchivos_lista,archivo.value)
@@ -161,7 +161,7 @@ document.getElementById("btnpermiso").onclick=function (){
                         localStorage.setItem("Compartidos_lista"+carnet.value,JSON.stringify(lc_compartidos)) 
                     }else{
                         let lc_compartidos=new CircularLinkedList()
-                        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos/"+username))
+                        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos"+ruta+username))
                         const misarchivos_compartidos=JSON.parse(localStorage.getItem("Compartidos"+carnet.value))
                         let archivo_obtenido=obtenerArchivo(misarchivos_lista,archivo.value)
                         
@@ -201,7 +201,7 @@ document.getElementById("btnpermiso").onclick=function (){
 
 window.obtenerArchivo=function(lista,nombre){
     for(let elem of lista){
-        if(elem.nombre===nombre){
+        if(elem.nombre==nombre){
             return elem
         }
     }
