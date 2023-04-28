@@ -146,6 +146,42 @@ document.getElementById("btnpermiso").onclick=function (){
                         localStorage.setItem("T_Permisos",JSON.stringify(tp_n))
                         localStorage.setItem("T_Permisos_prop",JSON.stringify(lc)) 
                     }
+
+
+                    //compartidos
+
+                    if(localStorage.getItem("Compartidos"+carnet.value)==null){
+                        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos/"+username))
+                        let lc_compartidos=new CircularLinkedList()
+                        let compartidos=[]
+                        let archivo_obtenido=obtenerArchivo(misarchivos_lista,archivo.value)
+                        compartidos.push(archivo_obtenido)
+                        lc_compartidos.append(archivo_obtenido)
+                        localStorage.setItem("Compartidos"+carnet.value,JSON.stringify(compartidos))
+                        localStorage.setItem("Compartidos_lista"+carnet.value,JSON.stringify(lc_compartidos)) 
+                    }else{
+                        let lc_compartidos=new CircularLinkedList()
+                        const misarchivos_lista=JSON.parse(localStorage.getItem("archivos/"+username))
+                        const misarchivos_compartidos=JSON.parse(localStorage.getItem("Compartidos"+carnet.value))
+                        let archivo_obtenido=obtenerArchivo(misarchivos_lista,archivo.value)
+                        
+                        
+                        if(!existearchivo(misarchivos_compartidos,archivo.value)){
+                            misarchivos_compartidos.push(archivo_obtenido)
+                        
+
+                            for(let arc of misarchivos_compartidos){
+                                lc_compartidos.append(arc)
+                            }
+
+                            localStorage.setItem("Compartidos"+carnet.value,JSON.stringify(misarchivos_compartidos))
+                            localStorage.setItem("Compartidos_lista"+carnet.value,JSON.stringify(lc_compartidos))
+                        }
+                        
+
+
+                         
+                    }
                    
 
                     $('#exito').modal('show');
@@ -161,6 +197,17 @@ document.getElementById("btnpermiso").onclick=function (){
 
     $("#modalRegisterForm").modal("hide"); // Oculta la modal
 }
+
+
+window.obtenerArchivo=function(lista,nombre){
+    for(let elem of lista){
+        if(elem.nombre===nombre){
+            return elem
+        }
+    }
+    return null
+}
+
 document.getElementById("per").onclick=function (){
     const input=document.getElementById("disabledInput")
     const archivo=document.getElementById("name_archivo")
