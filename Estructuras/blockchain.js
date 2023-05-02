@@ -1,6 +1,7 @@
 import {sha256,encryptMessageAES} from './encriptar.js'
 import {HashTable} from './TablaHash.js'
 
+
 class Block {
     constructor(timestamp, transmitter, receiver, message) {
       this.index = 0;
@@ -160,6 +161,75 @@ for (let c of data) {
         console.log(`${username}_${c.carnet}`)
         
       }else{// hay dos opciones que este username_c.carnet o c.carnet_username
+        let receiver=document.getElementById("receiver").innerText
+
+        if(localStorage.getItem(`${username.toString()}_${receiver}`)!==null){//guardado en el primero 
+          let lista_bloques=JSON.parse(localStorage.getItem(`${username.toString()}_${receiver}`))
+          
+          for(let mensa of lista_bloques){
+            
+            if(username.toString()===mensa.transmitter){//mensajes que se enviaron de tu cuenta rigth
+              const mensajeDiv = document.createElement("div");
+              mensajeDiv.classList.add("chat-message-right", "pb-4");
+              const contenido = `
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                  <div class="font-weight-bold mb-1">Tu-${username}</div>
+                  ${mensa.message}
+                </div>
+              `;
+              mensajeDiv.innerHTML = contenido;
+              document.getElementById("contenedor_mensajes").appendChild(mensajeDiv);
+            }else{//mensajes que recibiste a la izquierda
+              const mensajeDiv = document.createElement("div");
+              mensajeDiv.classList.add("chat-message-left", "pb-4");
+              const contenido = `
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                  <div class="font-weight-bold mb-1">${tablahash.get(parseInt(receiver)).nombre}-${receiver}</div>
+                  ${mensa.message}
+                </div>
+              `;
+              mensajeDiv.innerHTML = contenido;
+              document.getElementById("contenedor_mensajes").appendChild(mensajeDiv);
+            }
+
+          }
+    
+        }
+    
+        if(localStorage.getItem(`${receiver}_${username.toString()}`)!==null){
+          let lista_bloques=JSON.parse(localStorage.getItem(`${receiver}_${username.toString()}`))
+
+          for(let mensa of lista_bloques){
+            
+            if(username.toString()===mensa.transmitter){//mensajes que se enviaron de tu cuenta rigth
+              const mensajeDiv = document.createElement("div");
+              mensajeDiv.classList.add("chat-message-right", "pb-4");
+              const contenido = `
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                  <div class="font-weight-bold mb-1">Tu-${username}</div>
+                  ${mensa.message}
+                </div>
+              `;
+              mensajeDiv.innerHTML = contenido;
+              document.getElementById("contenedor_mensajes").appendChild(mensajeDiv);
+            }else{//mensajes que recibiste a la izquierda
+              const mensajeDiv = document.createElement("div");
+              mensajeDiv.classList.add("chat-message-left", "pb-4");
+              const contenido = `
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                  <div class="font-weight-bold mb-1">${tablahash.get(parseInt(receiver)).nombre}-${receiver}</div>
+                  ${mensa.message}
+                </div>
+              `;
+              mensajeDiv.innerHTML = contenido;
+              document.getElementById("contenedor_mensajes").appendChild(mensajeDiv);
+            }
+
+          }
+
+
+
+        }
 
       }
       
@@ -199,6 +269,20 @@ document.getElementById("enviar").onclick=function(){
 
 
   }else{
+    let lista_doble=new DoubleLinkedList()
+
+    if(localStorage.getItem(`${username.toString()}_${receiver}`)!==null){
+      let lista_bloques=JSON.parse(localStorage.getItem(`${username.toString()}_${receiver}`))
+      lista_bloques.push(bloque)
+      localStorage.setItem(`${username.toString()}_${receiver}`,JSON.stringify(lista_bloques))
+
+    }
+
+    if(localStorage.getItem(`${receiver}_${username.toString()}`)!==null){
+      let lista_bloques=JSON.parse(localStorage.getItem(`${receiver}_${username.toString()}`))
+      lista_bloques.push(bloque)
+      localStorage.setItem(`${receiver}_${username.toString()}`,JSON.stringify(lista_bloques))
+    }
 
   }
 }
