@@ -1,10 +1,6 @@
-
-digraph L{
- node[shape=box fillcolor="#FFEDBB" style=filled]
- subgraph cluster_p{
-label="Permisos"
-bgcolor="#398D9C"
-raiz[label="/mate"]
-edge[dir="both"]
- raiz->F1
- raiz->C1{rank=same;raiz,C1}}}
+digraph LinkedList {
+	
+	node [shape=box];
+	
+	a->b->c
+}
