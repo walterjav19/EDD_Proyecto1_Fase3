@@ -28,3 +28,12 @@ body{
   #logout:hover {
     background-color: #d00;
   }
+  #miTextarea {
+    display: block;
+    margin: 0 auto;
+  }
+
+  #containerbtns {
+    display: flex;
+    justify-content: center;
+  }

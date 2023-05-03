@@ -253,53 +253,46 @@ document.getElementById("enviar").onclick=function(){
     mensajeDiv.innerHTML = contenido;
     document.getElementById("contenedor_mensajes").appendChild(mensajeDiv);
     input_msg.value = "";
-  }
-  let fecha=new Date();
-  let actual=fecha.getDate()+"-"+(fecha.getMonth()+1)+"-"+fecha.getFullYear()
-  let hora=fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-  let fl= `${actual}::${hora}`
-  let receiver=document.getElementById("receiver").innerText
-  let bloque=new Block(fl,username.toString(),receiver,mensaje)
-  if(localStorage.getItem(`${username.toString()}_${receiver}`)===null && localStorage.getItem(`${receiver}_${username.toString()}`)===null){//no existe
-    let lista_bloques=[]
-    lista_bloques.push(bloque)
 
-
-    localStorage.setItem(`${username.toString()}_${receiver}`,JSON.stringify(lista_bloques))
-
-
-  }else{
-    let lista_doble=new DoubleLinkedList()
-
-    if(localStorage.getItem(`${username.toString()}_${receiver}`)!==null){
-      let lista_bloques=JSON.parse(localStorage.getItem(`${username.toString()}_${receiver}`))
+    let fecha=new Date();
+    let actual=fecha.getDate()+"-"+(fecha.getMonth()+1)+"-"+fecha.getFullYear()
+    let hora=fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+    let fl= `${actual}::${hora}`
+    let receiver=document.getElementById("receiver").innerText
+    let bloque=new Block(fl,username.toString(),receiver,mensaje)
+    if(localStorage.getItem(`${username.toString()}_${receiver}`)===null && localStorage.getItem(`${receiver}_${username.toString()}`)===null){//no existe
+      let lista_bloques=[]
       lista_bloques.push(bloque)
+  
+  
       localStorage.setItem(`${username.toString()}_${receiver}`,JSON.stringify(lista_bloques))
-
+  
+  
+    }else{
+  
+      if(localStorage.getItem(`${username.toString()}_${receiver}`)!==null){
+        let lista_bloques=JSON.parse(localStorage.getItem(`${username.toString()}_${receiver}`))
+        lista_bloques.push(bloque)
+        localStorage.setItem(`${username.toString()}_${receiver}`,JSON.stringify(lista_bloques))
+  
+      }
+  
+      if(localStorage.getItem(`${receiver}_${username.toString()}`)!==null){
+        let lista_bloques=JSON.parse(localStorage.getItem(`${receiver}_${username.toString()}`))
+        lista_bloques.push(bloque)
+        localStorage.setItem(`${receiver}_${username.toString()}`,JSON.stringify(lista_bloques))
+      }
+  
     }
 
-    if(localStorage.getItem(`${receiver}_${username.toString()}`)!==null){
-      let lista_bloques=JSON.parse(localStorage.getItem(`${receiver}_${username.toString()}`))
-      lista_bloques.push(bloque)
-      localStorage.setItem(`${receiver}_${username.toString()}`,JSON.stringify(lista_bloques))
-    }
 
+
+
+    
   }
+
 }
     
-/*let lista=new DoubleLinkedList()
-let fecha=new Date();
-let actual=fecha.getDate()+"-"+(fecha.getMonth()+1)+"-"+fecha.getFullYear()
-let hora=fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-let fl= `${actual}::${hora}`
-let bloque=new Block(fl,"202102101","12321332","hola amigo")
-let bloque1=new Block(fl,"202102101","12321332","hola mundo")
-let bloque2=new Block(fl,"202102101","12321332","joker chapin")
-lista.append(bloque)
-lista.append(bloque1)
-lista.append(bloque2)
-console.log(lista.getMensaje(0))
-console.log(lista.graficar())*/
 
 
 
